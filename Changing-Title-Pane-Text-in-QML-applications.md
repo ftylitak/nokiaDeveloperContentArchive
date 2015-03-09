@@ -1,13 +1,13 @@
 # Abstract
-This article explains how to dynamically set the Title Pane text in a QML Application where **StatusBar** component is used from **Qt Quick Components for Symbian**.
+This article explains how to dynamically set the Title Pane text in a QML Application where `StatusBar` component is used from **Qt Quick Components for Symbian**.
 
 # Description
-This article targets the applications that are targeting Symbian Platform written in QML and uses Qt Quick Components for Symbian. As defined by the [http://www.developer.nokia.com/Resources/Library/Symbian_Design_Guidelines/index.html Symbian Design Guidelines] all the Symbian applications are advised to have Status Bar visible. This gives us the opportunity to use the Title Pane of the **StatusBar** to show context-dependent text according to the state of our application. 
+This article targets the applications that are targeting Symbian Platform written in QML and uses Qt Quick Components for Symbian. As defined by the _Symbian Design Guidelines_ all the Symbian applications are advised to have Status Bar visible. This gives us the opportunity to use the Title Pane of the `StatusBar` to show context-dependent text according to the state of our application. 
 
 # The interesting part
-The **StatusBar** component contained in Qt Quick Components is not the real native status bar. It is just a custom component made to look and act exactly like the native Status Bar. In most cases no one will notice that fact. But when it comes to controlling it, a normal thought would be to use the _Overview Symbian C++ Title Pane API_ but playing around for a while you will see that nothing happens no matter what...this is the main difference.
+The `StatusBar` component contained in Qt Quick Components is not the real native status bar. It is just a custom component made to look and act exactly like the native Status Bar. In most cases no one will notice that fact. But when it comes to controlling it, a normal thought would be to use the _Overview Symbian C++ Title Pane API_ but playing around for a while you will see that nothing happens no matter what...this is the main difference.
 
-The resolution is quite simple. Use the **StatusBar** component as if it was any other component and show on it the information you want like you would on an other QML element. This leads use to the following code:
+The resolution is quite simple. Use the `StatusBar` component as if it was any other component and show on it the information you want like you would on an other QML element. This leads use to the following code:
 
 Using QML Window element as base:
 
@@ -89,7 +89,7 @@ Using QML Window element as base:
         }
     }
 
-Using _QML PageStackWindow_ element as base:
+Using `QML PageStackWindow` element as base:
 
     import QtQuick 1.1
     import com.nokia.symbian 1.1
@@ -151,7 +151,7 @@ Using _QML PageStackWindow_ element as base:
         }
     }
 
-Create a **QML Rectangle** element in the Status Bar containing a **QML Text** element that will hold the title. The width of the Rectangle is set accordingly to create boundaries for the title so that the Status Bar information will not get overlapped. This is why the _clip_ property is set to true. To remain consistent with the looks of the native Title Pane we place a **QML Gradient**  element at the end of the rectangle to make the clipped text fade out (in case it is too long). 
+Create a `QML Rectangle` element in the Status Bar containing a `QML Text` element that will hold the title. The width of the Rectangle is set accordingly to create boundaries for the title so that the Status Bar information will not get overlapped. This is why the _clip_ property is set to true. To remain consistent with the looks of the native Title Pane we place a `QML Gradient`  element at the end of the rectangle to make the clipped text fade out (in case it is too long). 
 
 Now you are ready at any time and any point of your code to just do the following and you are done!
 
@@ -160,7 +160,7 @@ Now you are ready at any time and any point of your code to just do the followin
 Ok, we haven't implemented the animation of the native Title Pane has (when long title is set) but for the time it is something minor and trivial.
 
 # Screenshots 
-![](http://nikolaosftylitakis.com/wiki/media/Changing_Title_Pane_Text_in_QML_applications/CustomTitlePane.JPG)
-![](http://nikolaosftylitakis.com/wiki/media/Changing_Title_Pane_Text_in_QML_applications/CustomTitlePaneLong.JPG)
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Changing_Title_Pane_Text_in_QML_applications/CustomTitlePane.JPG)
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Changing_Title_Pane_Text_in_QML_applications/CustomTitlePaneLong.JPG)
 
 [[User:Favoritas37|Favoritas37]] 16:53, 30 July 2012 (EEST)
