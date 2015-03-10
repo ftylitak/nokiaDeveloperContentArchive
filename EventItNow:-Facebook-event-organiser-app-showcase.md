@@ -90,12 +90,12 @@ Main menu (Portrait - Landscape)
 ![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/EventItNow_facebook_edited.png)
 
 This is how the event looks like when accessed from the Facebook itself. Follows the explanation of each field:
-* The name of the user. Set according to the user that gets logged in, in EventItNow.
-* The privacy status. Is set either when creating the event or from the Settings view in the Event menu.
-* The start and end date of the event. Same as privacy status
-* The Google Maps link created by setting a location marker in the Location View
-* The event details set at event creations of from the Settings view
-* The location details set from the details dialog in Location View.
+ 1. The name of the user. Set according to the user that gets logged in, in EventItNow.
+ 1. The privacy status. Is set either when creating the event or from the Settings view in the Event menu.
+ 1. The start and end date of the event. Same as privacy status
+ 1. The Google Maps link created by setting a location marker in the Location View
+ 1. The event details set at event creations of from the Settings view
+ 1. The location details set from the details dialog in Location View.
 
 ## Videos
 <mediaplayer>http://www.youtube.com/watch?v=Io9rWvm8kXs</mediaplayer>
