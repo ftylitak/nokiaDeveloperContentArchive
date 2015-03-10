@@ -1,17 +1,14 @@
 ----------------------------------------------------------------------------
-Author:     fkizewski
+Author:     user1
 Created:    12/15/10 14:00:59
-Moderators:
+
 ----------------------------------------------------------------------------
 
-Hi,
+Hi, I've just following your tutorial to compile the QBluetooth library, but in Carbide when building, i've some error like:
 
-I've just following your tutorial to compile the QBluetooth library, but in Carbide when building, i've some error like:
-{{{
-string: No such file or directory
-expected init-declaration before '<' token
-...
-}}}
+    string: No such file or directory
+    expected init-declaration before '<' token
+
 I've install this on my Windows Vista or Windows 7:
 - 3rd Edition, FP2 v1.1 (455 MB)
 - Bluetooth Engine API for 3rd Edition FP2
@@ -28,10 +25,10 @@ Thanks a lot, Fabrice
 ----------------------------------------------------------------------------
 Author:     favoritas37
 Created:    12/16/10 02:17:43
-Moderators:
+
 ----------------------------------------------------------------------------
 
-Hello fkizewski.
+Hello user1.
 
 Every error comes with a line number, where it occurred.
 Can you please send some more information like for example the console output of the compiler?
@@ -43,9 +40,9 @@ May be, after installing OpenC/C++ it would be wise of you to reinstall the Qt f
 Regards.
 
 ----------------------------------------------------------------------------
-Author:     tech.spvn
+Author:     user2
 Created:    12/16/10 02:51:48
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Hey guy! I've tried compiled bluetooth library by Carbide, I've follow a member of forum, but in carbide when building, I've some error: "BLDMAKE ERROR: Can't find "\Symbian....\BLD.INF" And, this error at follow image:
@@ -54,28 +51,27 @@ Can you please explain me where i've make a mistakes?
 thanks alot!
 
 ----------------------------------------------------------------------------
-Author:     fkizewski
+Author:     user1
 Created:    12/16/10 13:41:11
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Hi favoritas37,
 
 Thanks a lot for your help, now the library is successfull compiled.
-For anyone needs to compile them, there is the processus i make (On Windows Vista):
-{{{
-Install 3rd Edition, FP2 v1.1 (455 MB)
-Install the OpenC/C++ plug-in
-Add Bluetooth Engine API for 3rd Edition FP2
-Qt for symbian 4.6.3
-Carbide++
-}}}
+For anyone needs to compile them, there is the processes i make (On Windows Vista):
+
+    Install 3rd Edition, FP2 v1.1 (455 MB)
+    Install the OpenC/C++ plug-in
+    Add Bluetooth Engine API for 3rd Edition FP2
+    Qt for symbian 4.6.3
+    Carbide++
 
 But now, for include it in my project, i make this? Can you confirm it!
 I put the file: QBluetooth_0x2003328D.dso in my SDK folder (in my case: \NokiaQtSDK\Symbian\SDK\epoc32\release\armv5\lib\, because it's on another computer on Windows 7)
 In my .pro file i add this line:
 
-{{{
+----
 LIBS += -lQBluetooth_0x2003328D
 
 symbian {
@@ -93,7 +89,8 @@ symbian {
     addFiles.path = !:\sys\bin
     DEPLOYMENT += addFiles
 }
-}}}
+
+----
 
 And in my class that need to use QBluetooth, i put: #include <QBluetooth/QBluetooth.h>
 
@@ -104,7 +101,7 @@ Thanks in advance, regards Fabrice
 ----------------------------------------------------------------------------
 Author:     favoritas37
 Created:    12/16/10 13:50:16
-Moderators:
+
 ----------------------------------------------------------------------------
 
 No you don't only need QBluetooth_0x2003328D.dso.
@@ -119,9 +116,9 @@ Generally speaking, the best thing you can do is, start a search in the epoc32 r
 Furthermore, in the program that will use the library you have to put #include <QBluetooth.h> since you have previously added the path for the headers in the include path.
 
 ----------------------------------------------------------------------------
-Author:     fkizewski
+Author:     user1
 Created:    12/21/10 12:52:29
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Hi
