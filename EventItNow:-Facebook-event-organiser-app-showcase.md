@@ -54,40 +54,40 @@ The MySql backend of the [Offiline Storage](http://doc.qt.digia.com/qt-5.2/qtqui
 So enough with the talking. Follows screenshots of the application in Portrait mode and two videos showing both Portrait and Landscape mode adaptation.
 
 ## Screenshots
-[[File:StartScreen portrait.PNG]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/StartScreen_portrait.PNG)
 
-[[File:StartScreen landscape.PNG]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/StartScreen_landscape.PNG)
 
 Start Screen (Portrait - Landscape)
 
-[[File:MainMenu portrait.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/MainMenu_portrait.png)
 
-[[File:MainMenu landscape.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/MainMenu_landscape.png)
 
 Main menu (Portrait - Landscape)
 
-[[File:EventCreation.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/EventCreation.png)
 
-[[File:EventPicker.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/EventPicker.png)
 
-[[File:LocationPicker.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/LocationPicker.png)
 
-[[File:ShoppingList.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/ShoppingList.png)
 
-[[File:NewShoppingItemDialog.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/NewShoppingItemDialog.png)
 
-[[File:TaskDetails.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/TaskDetails.png)
 
-[[File:To-DoList.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/To-DoList.png)
 
-[[File:EventItNowWarning.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/EventItNowWarning.png)
 
-[[File:FbFriendList.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/FbFriendList.png)
 
-[[File:About.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/About.png)
 
 ## Facebook Screenshot
-[[File:EventItNow facebook edited.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/EventItNow_Facebook_event_organiser_app_showcase/EventItNow_facebook_edited.png)
 
 This is how the event looks like when accessed from the Facebook itself. Follows the explanation of each field:
 * The name of the user. Set according to the user that gets logged in, in EventItNow.
@@ -103,8 +103,6 @@ This is how the event looks like when accessed from the Facebook itself. Follows
 <mediaplayer>http://www.youtube.com/watch?v=rX7CLUBiHr0</mediaplayer>
 
 # Download
-<big>For the latest version visit [http://store.ovi.com/content/324371 Event It Now 's Nokia Store page]!</big>
+<big>For the latest version visit [Event It Now 's Opera Mobile Store page](http://symbian.apps.opera.com/en_us/event_it_now.html?dm=1&multi=1)!</big>
 
-To download the binary of EventItNow version 1.1 presented here press [[File:EventItNow installer.sis|here]].
-
-{{Note|This is an entry in the [[Symbian Qt Quick Components Competition 2012Q1]]}}
+`This was an entry in the Symbian Qt Quick Components Competition 2012Q1`
