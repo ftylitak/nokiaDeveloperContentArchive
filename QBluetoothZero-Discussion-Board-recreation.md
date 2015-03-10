@@ -1,6 +1,6 @@
 This is an attempt of restoring as many as possible discussions from the already terminated QBluetoothZero's page in Nokia Projects. Some post or topics are missing though the majority of the discussion board has been restored. For privacy and licensing issues all the usernames have been replaced by dummy usernames.
 
-* [[Topic #5: QBtDeviceDiscoverer error|Topic-%23%235:-QBtDeviceDiscoverer-error]]
+* [[Topic #5: QBtDeviceDiscoverer error|Topic-#5:-QBtDeviceDiscoverer-error]]
 * [[Topic #6: Device selection UI|Topic-%236:-Device-selection-UI]]
 * [[Topic #7: QBluetooth library: Can't work with QT mobility and sensors|Topic-%237:--QBluetooth-library-Can't-work-with-QT-mobility-and-sensors]]
 * [[Topic #8: How to compile QBluetooth|Topic-%238:-How-to-compile-QBluetooth]]
