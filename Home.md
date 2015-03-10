@@ -15,4 +15,4 @@ Wiki pages:
 * [[QuteMessenger Bluetooth Chat|QuteMessenger---Bluetooth-Chat]]
 
 QBluetoothZero:
-* [[Discussion Board|QBluetoothZero-Discussion-Board-recreation]]
+* [[Discussion Boards|QBluetoothZero-Discussion-Board-recreation]]
