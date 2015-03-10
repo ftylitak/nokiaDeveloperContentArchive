@@ -7,9 +7,9 @@ As it is well-known by now, mobile phone world is tightly coupled with the imagi
 # Summary 
 The goal of this article is to create a QML extendable base component that can be used in image tools. It will start by explaining the finger interaction with the image which will provide scaling, rotation and the selection of image portions. Then we define the bounding rectangle that will be the user reference point to the selection of the image portion followed by the creation of an extendable button area over it to lay the Action Tools. For closing, a C++ tool named ImageHandler will be explained which is responsible for various image manipulations between C++ and QML worlds. Follows 2 screenshots (portrait & landmark) depicting the visible aforementioned components.
 
-[[Image:Mulitfunctional imagetool landscape details.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Multifunctional_Image_Tool_A_base_for_image_interaction/Mulitfunctional_imagetool_landscape_details.png)
 
-[[Image:Mulitfunctional imagetool portrait details.png]]
+![](https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Multifunctional_Image_Tool_A_base_for_image_interaction/Mulitfunctional_imagetool_portrait_details.png)
 
 # Interaction Area 
 By saying Interaction Area we define the component where the image is loaded and shown which provides the ability to zoom/unzoom into the image and navigate around it.  It is purely written in QML using a [http://doc.qt.nokia.com/4.7-snapshot/qml-flickable.html Flickable] element, a [http://doc.qt.nokia.com/4.7-snapshot/qml-pincharea.html PichArea] element and an [http://doc.qt.nokia.com/4.7-snapshot/qml-image.html Image] element. Lets see the code and right after it will be explained step by step:
@@ -109,7 +109,6 @@ By saying Interaction Area we define the component where the image is loaded and
             source: mainPage.source
         }
     }
-    </code>
     
 First step is to load the image and show it to the screen. For that an Image element will be used. To load an image to the Image element you just have to set the ''source'' property of the element and it will be loaded. Hold that the source can be either the absolute path of an image, the relative path or a URL used to request the image from a custom Image Provider (this will be also explaned along with ImageHandler further on). Keep in mind that if using the [http://doc.qt.nokia.com/qtmobility-1.2/qml-camera.html Camera] element, the captured images are also provided by a default Image Provider so in method [http://doc.qt.nokia.com/qtmobility-1.2/qml-camera.html#onImageCaptured-signal onImageCaptured] the ''preview'' argument will work just fine as the source. So the image is loaded but with its default size which is for example 7700x4400 (just a number, nothing specific). So since the screen is normally 360x640 we will be able to see only a small part of the image. For that reason next step was to add the image in a Flickable element for us to be able to scroll/navigate around the image. The Flickable element will be anchored to fill the screen thus making our screen the "window" to the image. By setting the contentWidth and contentHeight of the Flickable element we define the actual size of the image which will define the scrolling bounds when flicking. For convenience in next steps, the size of the Image element is chosen to be bound to the size of the content of the Flickable element and not the other way around (which would also be acceptable). By this binding we ensure that the size of the content of the Flickable element always equals the size of the image making the whole image visible.
     
@@ -171,7 +170,7 @@ All the above elements form our application screen. Putting them all together is
 The **extractPortionGeometry** function is an auxiliary function that takes as input the Bounding Rectangle and the data by Interaction Area and calculates the size of the image portion translated in coordinates that apply to the original image. Calling this function we have the exact offset in the original image from where the cropping will take place and the width & height define till where.
 
 # Image Handler 
-The only C++ class of the project is created to give advanced operations that QML by itself can't provide. Follows the header file of the class and later on method-by-method the source code will be explained. Initially the class was created to be registered as a context property to be used as the medium to extract the data from an Image QML element. Having the data of the image in a QImage instance the whole world of Qt opens being able to do any operation needed, in our case save the image to the file system. Later on i thought, why supporting only the passing from QML to C++ and not both ways. That is when the class got a second role, the role of an Image Provider by inheriting from [http://doc.qt.nokia.com/4.7-snapshot/qdeclarativeimageprovider.html QDeclerativeImageProvider]. Now it is able to also provide to any QML element of any image requested as long as the image is made accessible through the function **makeImageAvailable**. An interesting point here is that by having a QMap storing images represented by a unique string the ImageHandler can work as a runtime image storage. Create any image you want at runtime, store it there and it will be accessible whenever needed. The whole packet in my opinion is a very good tool that unties our hands from issues of interconnection between C++ and QML. 
+The only C++ class of the project is created to give advanced operations that QML by itself can't provide. Follows the header file of the class and later on method-by-method the source code will be explained. Initially the class was created to be registered as a context property to be used as the medium to extract the data from an Image QML element. Having the data of the image in a QImage instance the whole world of Qt opens being able to do any operation needed, in our case save the image to the file system. Later on i thought, why supporting only the passing from QML to C++ and not both ways. That is when the class got a second role, the role of an Image Provider by inheriting from [http://doc.qt.nokia.com/4.7-snapshot/qdeclarativeimageprovider.html QDeclerativeImageProvider]. Now it is able to also provide to any QML element of any image requested as long as the image is made accessible through the function **makeImageAvailable**. An interesting point here is that by having a QMap storing images represented by a unique string the ImageHandler can work as a runtime image storage. Create any image you want at runtime, store it there and it will be accessible whenever needed. The whole packet in my opinion is a very good tool that unties our hands from issues of interconnection between C++ and QML.
 
     #ifndef IMAGEHANDLER_H
     #define IMAGEHANDLER_H
@@ -240,91 +239,91 @@ The only C++ class of the project is created to give advanced operations that QM
 The main function used to convert an Image QML element to a QImage instance. First argument is the Image QML element. In QML when calling the function use the id of the Image Element as first argument and it will be fine. The rest arguments, if not used will indicate that the QImage returned will contain exactly the same image as the original image. If any of those is set the function will return a QImage containing the portion of the image define by those variables.
 
 * requestImage(const QString &id, QSize *size, const QSize &requestedSize)
-The virtual function of QDeclarativeImageProvider that had to be implemented. The implementation is pretty clear, a simple lookup to see if the image requested exists. If it does, it returns the image. If not, it returns white image matching the size of the requestedSize.
-
-    #include "imagehandler.h"
-    #include <QGraphicsObject>
-    #include <QImage>
-    #include <QPainter>
-    #include <QStyleOptionGraphicsItem>
-    #include <QDebug>
-    #include <QFileInfo>
+The virtual function of QDeclarativeImageProvider that had to be implemented. The implementation is pretty clear, a simple lookup to see if the image requested exists. If it does, it returns the image. If not, it returns white image matching the size of the requestedSize. 
+   
+        #include <QGraphicsObject>
+        #include "imagehandler.h"
+        #include <QImage>
+        #include <QPainter>
+        #include <QStyleOptionGraphicsItem>
+        #include <QDebug>
+        #include <QFileInfo>
+        
+        ImageHandler::ImageHandler(QString providerName, QObject *parent) :
+            QObject(parent),
+            QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
+            _providerName(providerName)
+        {
+        }
+        
+        QString ImageHandler::providerName()
+        {
+            return _providerName;
+        }
     
-    ImageHandler::ImageHandler(QString providerName, QObject *parent) :
-        QObject(parent),
-        QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
-        _providerName(providerName)
-    {
-    }
-    
-    QString ImageHandler::providerName()
-    {
-        return _providerName;
-    }
-    
-    QImage ImageHandler::extractQImage(QObject *imageObj,
+        QImage ImageHandler::extractQImage(QObject *imageObj,
                                        const double offsetX, const double offsetY,
                                        const double width, const double height)
-    {
-        QGraphicsObject *item = qobject_cast<QGraphicsObject*>(imageObj);
-    
-        if (!item) {
-            qDebug() << "Item is NULL";
-            return QImage();
-        }
-    
-        QImage img(item->boundingRect().size().toSize(), QImage::Format_RGB32);
-    img.fill(QColor(255, 255, 255).rgb());
-        QPainter painter(&img);
-        QStyleOptionGraphicsItem styleOption;
-        item->paint(&painter, &styleOption);
-    
-        if(offsetX # 0 && offsetY # 0 && width # 0 && height # 0)
-            return img;
-        else
         {
-            return img.copy(offsetX, offsetY, width, height);
+            QGraphicsObject *item = qobject_cast<QGraphicsObject*>(imageObj);
+        
+            if (!item) {
+                qDebug() << "Item is NULL";
+                return QImage();
+            }
+    
+            QImage img(item->boundingRect().size().toSize(), QImage::Format_RGB32);
+            img.fill(QColor(255, 255, 255).rgb());
+            QPainter painter(&img);
+            QStyleOptionGraphicsItem styleOption;
+            item->paint(&painter, &styleOption);
+        
+            if(offsetX # 0 && offsetY # 0 && width # 0 && height # 0)
+                return img;
+            else
+            {
+                return img.copy(offsetX, offsetY, width, height);
+            }
         }
-    }
 
-    void ImageHandler::save(QObject *imageObj, const QString &path,
+        void ImageHandler::save(QObject *imageObj, const QString &path,
                             const double offsetX, const double offsetY,
                             const double width, const double height)
-    {
-        QImage img = extractQImage(imageObj, offsetX, offsetY, width, height);
-        img.save(path);
-    }
+        {
+            QImage img = extractQImage(imageObj, offsetX, offsetY, width, height);
+            img.save(path);
+        }
     
-    bool ImageHandler::imageFileExists(const QString &path)
-    {
-        return QFileInfo(path).exists();
-    }
+        bool ImageHandler::imageFileExists(const QString &path)
+        {
+            return QFileInfo(path).exists();
+        }
     
-    void ImageHandler::makeImageAvailable(const QImage image, const QString& uniqueName)
-    {
-        imageRepository[uniqueName] = image;
-    }
+        void ImageHandler::makeImageAvailable(const QImage image, const QString& uniqueName)
+        {
+            imageRepository[uniqueName] = image;
+        }
     
-    void ImageHandler::removeImage(const QString& uniqueName)
-    {
-        if(imageRepository.contains(uniqueName))
-            imageRepository.remove(uniqueName);
-    }
+        void ImageHandler::removeImage(const QString& uniqueName)
+        {
+            if(imageRepository.contains(uniqueName))
+                imageRepository.remove(uniqueName);
+        }
     
-    QImage ImageHandler::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
-    {
-        QImage* selectedImage = NULL;
-        if(imageRepository.contains(id))
-            selectedImage = &imageRepository[id];
-        else
-            selectedImage = new QImage(requestedSize, QImage::Format_ARGB32);
+        QImage ImageHandler::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+        {
+            QImage* selectedImage = NULL;
+            if(imageRepository.contains(id))
+                selectedImage = &imageRepository[id];
+            else
+                selectedImage = new QImage(requestedSize, QImage::Format_ARGB32);
+        
+            if(size)
+                *size = QSize(selectedImage->width(), selectedImage->height());
     
-    if(size)
-            *size = QSize(selectedImage->width(), selectedImage->height());
-    
-        return *selectedImage;
-    }
-    
+            return *selectedImage;
+        }
+   
 ## How to make the class visible to QML
 After the creation of an instance of ImageProvider 2 function calls have to be done to make it fully available to QML. First add it as a context property. Thus it will be accessible (and all its methods) through QML by the name given. The second call is to register the class as an Image Provider to the declarative engine. 
     
@@ -339,9 +338,8 @@ From the main.cpp
 
 Of course this could be implemented as a QML plugin so the above step would be unnecessary...but that is keep for the future. 
 
-
 # Source Code project
-The source code can be found [[file:Multifunctional_Image_Tool_source.zip]] as a complete project. 
+The source code can be found https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Multifunctional_Image_Tool_A_base_for_image_interaction/Multifunctional_Image_Tool_source.zip as a complete project. 
 
 _EDIT:_ the source code has been updated to hold some small changes. The changes include the turning into platform independent code. All the Symbian specific code is commented out as well as QZXing code to make it easier for you to try it out. Also the installer for Symbian is updated which still holds the barcode decoding capabilities.
 
