@@ -25,7 +25,7 @@ It currently supports decoding:
 * PDF 417 ('alpha' quality)
 
 
-[[File:QrDecoderQt.png|frame|Qr Code containing the text "Qr Decoder in Qt"]]
+[[https://github.com/favoritas37/nokiaDeveloperContentArchive/blob/master/Qr_Decoder_in_Qt/QrDecoderQt.png|frame|Qr Code containing the text "Qr Decoder in Qt"]]
 
 == The three parts of the project ==
 
