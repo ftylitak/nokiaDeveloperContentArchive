@@ -1,4 +1,4 @@
-== Abstract ==
+= Abstract =
 QBluetoothZero is a '''3rd party''' bluetooth library written on Qt supported on Symbian and Windows. Its architecture is based on [http://www.developer.nokia.com/info/sw.nokia.com/id/89261a1d-ed6d-4cc5-8855-8250a33de328/S60_Platform_Bluetooth_API_Developers_Guide.html S60 Platform: Bluetooth API Developer's Guide].
 
 ; Warning : The project has been renamed from {{Icode|QBluetooth}} to {{Icode|QBluetoothZero}} to avoid conflicts with Bluetooth module of Qt Mobility. Users that have already used this library are advised to have a look at the following wiki page which states the changes that need to be made to comply with the new version of the library: [http://sourceforge.net/projects/qbluetoothzero/ QBluetoothZero])
@@ -65,10 +65,8 @@ This section provides answers to some questions that might arise when building t
 ==== Qt Creator doesn't find the Symbian SDK header files ====
 Add this to the QBluetoothZero .pro file, just before the HEADERS declaration at the beginning of the file.
 
-<code cpp-qt>
-# fix for Qt Creator to find the symbian headers
-INCLUDEPATH += $$EPOCROOT\epoc32\include
-</code>
+    # fix for Qt Creator to find the symbian headers
+    INCLUDEPATH += $$EPOCROOT\epoc32\include
 
 ==== Compiler error in <obexbase.h>, line 205: extra qualification 'CObex::' on member "!CancelObexConnection". ====
 
@@ -80,17 +78,15 @@ The solution found so far for S60 5th Edition SDK and Nokia Qt SDK 1.0 is to ins
 
 If Qt Creator complains about {{{-lbtextnotifiers}}} or {{{-lirobex}}}, when using as target Qt devices (Nokia Qt SDK 1.0): The solution so far is to either use another SDK (as the 5th Edition SDK), or to copy the missing files from the 5th Edition SDK). The files are:
 
-<code>
-btextnotifiers.dso 
-btextnotifiers.lib 
-btextnotifiers{000a0000}.dso 
-btextnotifiers{000a0000}.lib 
-
-irobex.dso
-irobex.lib
-irobex{000a0000}.dso
-irobex{000a0000}.lib
-</code>
+    btextnotifiers.dso 
+    btextnotifiers.lib 
+    btextnotifiers{000a0000}.dso 
+    btextnotifiers{000a0000}.lib 
+    
+    irobex.dso
+    irobex.lib
+    irobex{000a0000}.dso
+    irobex{000a0000}.lib
 
 These files are located in '''\epoc32\release\armv5\lib''' of the SDK installation directory.
 
@@ -100,22 +96,19 @@ No known solution so far. Even if having configured the build target to sign the
 
 To make Qt Creator generate the .pkg file, add this to the QBluetoothZero.pro file at the end of the file:
 
-<code>
-addFiles.sources = QBluetoothZero.dll
-addFiles.path = !:\sys\bin
-DEPLOYMENT += addFiles
-</code>
+    addFiles.sources = QBluetoothZero.dll
+    addFiles.path = !:\sys\bin
+    DEPLOYMENT += addFiles
 
 ==== Compiler errors when modifying the public API (any public method of QBluetoothZero classes), with Qt Creator ====
 
 When modifying the public API in Symbian DLLs, it's necessary to freeze the API. Currently, Qt Creator does not do this, and there's no way to instruct it to make this step. This is a known Qt Creator bug  (https://bugreports.qt-project.org/browse/QTCREATORBUG-772). 
 
 To freeze the API it's necessary to run it from the command line. Create a .bat file and place it in the same directory where the QBluetoothZero .pro file resides.  Write the text below:
-<code>
-set EPOCROOT=\Dev\Symbian\S60_3rd_FP1\
-del eabi\*.def
-abld freeze gcce
-</code>
+
+    set EPOCROOT=\Dev\Symbian\S60_3rd_FP1\
+    del eabi\*.def
+    abld freeze gcce
 
 Set the '''EPOCROOT''' variable to the root of the Symbian SDK that is being used by the project (without the drive letter as in the example).  For Nokia Qt SDK 1.0, this is '''sdk instalation folder"\Symbian\SDK'''. Then, proceed as this:
 
@@ -132,35 +125,29 @@ The following lines must be inserted in the .pro file of the project that is goi
 
 If compiling for Symbian, add in ''symbian'' scope:
 
-<code>
+    LIBS += -lQBluetoothZero
     
-LIBS += -lQBluetoothZero
-
-symbian {
-
-    INCLUDEPATH += /epoc32/include/QBluetoothZero
-
-    TARGET.CAPABILITY = LocalServices \
-        NetworkServices \
-        ReadUserData \
-        UserEnvironment \
-        WriteUserData 
-
-    addFiles.sources = QBluetoothZero.dll
-    addFiles.path = !:\sys\bin
-    DEPLOYMENT += addFiles
-}
-
-</code>
+    symbian {
+    
+        INCLUDEPATH += /epoc32/include/QBluetoothZero
+    
+        TARGET.CAPABILITY = LocalServices \
+            NetworkServices \
+            ReadUserData \
+            UserEnvironment \
+            WriteUserData 
+    
+        addFiles.sources = QBluetoothZero.dll
+        addFiles.path = !:\sys\bin
+        DEPLOYMENT += addFiles
+    }
 
 If compiling for Windows, add in ''win32'' scope (supposing that the folder QBluetoothZero containing all the headers is in the same directory as the project that is going to use it):
 
-<code>
     LIBS += -lQBluetoothZero \
         -LQBluetoothZero\bin\release
     INCLUDEPATH = QBluetoothZero
     HEADERS += QBluetoothZero.h
-</code>
 
 The LIBS label sets the location of the file containing the .lib file, the INCLUDEPATH sets the location of the header file and HEADERS is used to specify the exact header to be included.
 
@@ -186,30 +173,25 @@ Copy the contents of bin file ("epoc32" folder) in the "epoc32" folder of your S
 * Step 2
 Put the following lines in your .pro file:
 
-<code>
-
-symbian{
+    symbian{
        INCLUDEPATH += /epoc32/include/QBluetoothZero
        LIBS += -lQBluetoothZero
 
        customrules.pkg_prerules  = \
-	";QBluetoothZero" \
-	"@\"$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
-	" "	
-	
-	DEPLOYMENT += customrules
-}
-</code>
+       ";QBluetoothZero" \
+       "@\"$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
+       " "	
+       
+       DEPLOYMENT += customrules
+    }
 
 In case you use Qt Creator, the following line:
-<code>
-"@\"$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
-</code>
+
+    "@\"$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
 
 must be changed into (just add a '$" character):
-<code>
-"@\"$$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
-</code>
+
+    "@\"$$(EPOCROOT)Epoc32/InstallToDevice/QBluetoothZero_selfsigned.sis\",(0xA003328D)"\
 
 * Step 3
 Compile your appllication.
@@ -222,15 +204,10 @@ Compile your appllication.
 - call [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_device_discoverer.html#a76e9223d3b2330c1c26c94bee5a1ae5f startDiscovery()] to initiate inquiry
 - call [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_device_discoverer.html#a74851bd623fc4d333791d6a295c10478 getInquiredDevices()] to retrieve the devices found so far or connect to SIGNAL '''[http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_device_discoverer.html#aa88fadfe4eabe2b5ad1d7b0eb92653d3 newDeviceFound (QBtDevice)]''' to be reported each time a device is found
 
-<code cpp-qt>
-
-QBtDeviceDiscoverer* deviceDiscoverer = new QBtDeviceDiscoverer(this);
-connect(deviceDiscoverer , SIGNAL(newDeviceFound (QBtDevice)), 
-        this, SLOT(handlerFunction(QBtDevice)));
-deviceDiscoverer ->startDiscovery();
-
-</code>
-
+    QBtDeviceDiscoverer* deviceDiscoverer = new QBtDeviceDiscoverer(this);
+    connect(deviceDiscoverer , SIGNAL(newDeviceFound (QBtDevice)), 
+            this, SLOT(handlerFunction(QBtDevice)));
+    deviceDiscoverer ->startDiscovery();
 
 == Discovering services on a device ==
 [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_discoverer.html QBtServiceDiscoverer] is used to inquire a remote device for the services it supports. 
@@ -243,15 +220,11 @@ Use [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_disc
 
 Example: inquire a device (variable name ''remoteDevice'') for all the Serial Port Protocols (SPP) it supports.
 
-<code cpp-qt>
-
 	QBtServiceDiscoverer* serviceDiscoverer = new QBtServiceDiscoverer(this);
 	connect (serviceDiscoverer, SIGNAL(newServiceFound(const QBtDevice&, const QBtService&)), 
 	        this, SLOT (handlerFunction(const QBtDevice&, const QBtService& )));
 
 	serviceDiscoverer->startDiscovery (remoteDevice, QBtConstants::SerialPort);
-
-</code>
 
 == Publish a service ==
 [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_advertiser.html QBtServiceAdvertiser] is responsible to advertise a given bluetooth service.
@@ -259,8 +232,6 @@ Example: inquire a device (variable name ''remoteDevice'') for all the Serial Po
 After the instantiation of the class, [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_advertiser.html#a52bc79594aefff3eb687688b4fdb4fad startAdvertising(const QBtService&)] can be called to start advertising the given bluetooth service. If successful then [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_advertiser.html#ad3b82bfa197b6ee4454082b4ebe7de6b advertisingStarted(const QBtService&)] signal is emitted.
 
 NOTE: Currently there is no implementation on the Windows platform so after the instantiation of this object, any call to any function will emit an [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_service_advertiser.html#a11393d220f3013ab21b310253330d892 error(QBtServiceAdvertiser::FeatureNotSupported)] signal.
-
-<code cpp-qt>
 
 	QBtService newService;
 	newService.setName(p_ptr->trService->getName());
@@ -271,8 +242,6 @@ NOTE: Currently there is no implementation on the Windows platform so after the 
 	
 	QBtServiceAdvertiser* advertiser = new QBtServiceAdvertiser(this);
 	advertiser->startAdvertising(newService);	
-	
-</code>
 
 == Send/receive a file ==
 [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_object_exchange_client.html QBtObjectExchangeClient] is used to connect to a remote OBEX server and send or recieve files or raw data.
@@ -281,58 +250,49 @@ Example connecting to a remote OBEX server. At successful connection user send a
 
 Header
 
-<code cpp-qt>
+    #include <QBluetoothZero>
 
- #include <QBluetoothZero>
-
-class FileSender
-{
-Q_OBJECT
-
-public:
-    FileSender();
-
-protected:
-    void Setup();
-
-private slots:
-    void SendFile();
-
-private:
-    QBtObjectExchangeClient* client;
-}
-
-</code>
+    class FileSender
+    {
+    Q_OBJECT
+    
+    public:
+        FileSender();
+    
+    protected:
+        void Setup();
+    
+    private slots:
+        void SendFile();
+    
+    private:
+        QBtObjectExchangeClient* client;
+    }
 
 Source
 
-<code cpp-qt>
-
-FileSender::FileSender()
-{
-    Setup();
-}
-
-void FileSender::Setup()
-{
-    client = new QBtObjectExchangeClient(this);
-    connect(client, SIGNAL(connectedToServer()), this,SLOT(SendFile()));
-    client->connectToServer(remoteDevice, remoteService); // remoteDevice & remoteService are acquired from the previous examples
-}
-
-void FileSender::SendFile()
-{
-    client->putFile("C:\\picture.jpg");
-}
-</code>
+    FileSender::FileSender()
+    {
+        Setup();
+    }
+    
+    void FileSender::Setup()
+    {
+        client = new QBtObjectExchangeClient(this);
+        connect(client, SIGNAL(connectedToServer()), this,SLOT(SendFile()));
+        client->connectToServer(remoteDevice, remoteService); // remoteDevice & remoteService are acquired from the previous examples
+    }
+    
+    void FileSender::SendFile()
+    {
+        client->putFile("C:\\picture.jpg");
+    }
 
 == OBEX server ==
 [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_object_exchange_server.html QBtObjectExchangeServer] is used to create an OBEX server. After instantiation user can call [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_object_exchange_server.html#a0eb4d3b5d82b34d109cc7433b34d48c8 startServer(const QString&)] to start the server. The feedback from the server's operations is given through SIGNALS.
-<code cpp-qt>
 
     QBtObjectExchangeServer* server = new QBtObjectExchangeServer(this);
     server->startServer("MyObexServer");
-</code>
 
  * NOTE: not implemented for Windows.
 
@@ -343,7 +303,6 @@ In this case we use [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q
 [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_serial_port_server.html QBtSerialPortServer] is used. Call [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_serial_port_server.html#a01abd43a827da150d87911c3dfa81763 startServer(const QString&)] to start server and set the name of the publishing service and then wait for a client to connect. When a client is connected, it is reported through [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_serial_port_server.html#a86c9f24f68a8fbd18f1653a598fc207d clientConnected(QBtAddress)] SIGNAL. At this point server is able to send data through sendData(const QString) and the data received are reported through [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_serial_port_server.html#abee23ef5ea738a22652f8c9b2ba14fc9 dataReceived(QString)].
 
 * NOTE: not implemented for Windows.
-
 
 = Other useful information =
 On the Windows implementation side, the bluetooth functions are provided by the Bluesoleil SDK. So in order to use the Windows implementation user must download the Bluesoleil SDK and Bluesoleil Drivers 6.4 and above. I know that this restriction is a drawback but I had a couple of months of experience on that SDK so it was the only chance for me to make a Windows implementation at this moment...but it works. 
