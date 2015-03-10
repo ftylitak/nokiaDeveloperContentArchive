@@ -13,3 +13,6 @@ Wiki pages:
 * [[QBluetoothZero: A Qt bluetooth library|QBluetoothZero:-A-Qt-bluetooth-library]]
 * [[Qr Decoder in Qt|Qr-Decoder-in-Qt]]
 * [[QuteMessenger Bluetooth Chat|QuteMessenger---Bluetooth-Chat]]
+
+QBluetoothZero:
+* [[Discussion Board|QBluetoothZero-Discussion-Board-recreation]]
