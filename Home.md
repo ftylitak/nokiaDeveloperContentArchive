@@ -9,3 +9,7 @@ Wiki pages:
 * [[Changing Title Pane Text in QML applications|Changing-Title-Pane-Text-in-QML-applications]]
 * [[EventItNow: Facebook event organizer app showcase|EventItNow:-Facebook-event-organiser-app-showcase]]
 * [[Fetch files from remote device via Bluetooth FTP|Fetch-files-from-remote-device-via-Bluetooth-FTP]]
+* [[Multifunctional Image Tool: A base for image interaction|Multifunctional-Image-Tool:-A-base-for-image-interaction]]
+* [[QBluetoothZero: A Qt bluetooth library|QBluetoothZero:-A-Qt-bluetooth-library]]
+* [[Qr Decoder in Qt|Qr-Decoder-in-Qt]]
+* [[QuteMessenger Bluetooth Chat|QuteMessenger---Bluetooth-Chat]]
