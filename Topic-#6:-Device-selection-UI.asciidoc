@@ -1,0 +1,217 @@
+_initial messages not restored_
+
+----------------------------------------------------------------------------
+Author:     user1
+Created:    03/18/11 03:18:26
+
+----------------------------------------------------------------------------
+
+> I've written a Qt wrapper that shows the standard bluetooth selecion UI on Symbian. Where to place it? As the private implementation of the QBtSingleDeviceSelectorUI ?
+>
+> Luis
+Hi Luis, I woul like to have that code, because I need  that option in my app. If can explain me how to get a Bt device selection native symbian window by pressing a QPushButton and get the device address back. I know something about Qt but a zero in Symbian C++. So please help me regarding this.
+
+----------------------------------------------------------------------------
+Author:     favoritas37
+Created:    03/18/11 11:04:14
+
+----------------------------------------------------------------------------
+
+Hello user1.
+
+QBtSingleDeviceSelectorUI is part of the library so you can find any information needed from the [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_single_device_selector_u_i.html documentation page].
+
+Here i wrote for you a working [https://projects.forum.nokia.com/qbluetooth/files/DeviceDiscovereNativeUI.zip example of how to use it]. It is a ready project so copy the QBluetooth binaries to your S60 SDK epoc root folder (as discribed [https://projects.forum.nokia.com/qbluetooth/wiki/binaries here]), compile the project and you are ready.
+
+Here follows the code of the project for a quick look:
+
+DeviceDiscovereNativeUI.h
+
+----
+
+#ifndef DEVICEDISCOVERENATIVEUI_H
+#define DEVICEDISCOVERENATIVEUI_H
+
+#include <QtGui/QMainWindow>
+#include "ui_DeviceDiscovereNativeUI.h"
+#include <QBluetooth.h>
+
+class DeviceDiscovereNativeUI : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+        DeviceDiscovereNativeUI(QWidget *parent = 0);
+    ~DeviceDiscovereNativeUI();
+
+public slots:
+        void startDiscovery();
+        void discoveryCompletedHandle(const QBtDevice &selectedDevice);
+
+private:
+    Ui::DeviceDiscovereNativeUI ui;
+    QBtSingleDeviceSelectorUI* discoveryUI;
+};
+
+#endif // DEVICEDISCOVERENATIVEUI_H
+----
+DeviceDiscovereNativeUI.cpp
+
+----
+
+#include "DeviceDiscovereNativeUI.h"
+
+DeviceDiscovereNativeUI::DeviceDiscovereNativeUI(QWidget *parent)
+    : QMainWindow(parent)
+{
+        ui.setupUi(this);
+
+        connect(ui.startButton, SIGNAL(clicked()),
+                        this, SLOT(startDiscovery()));
+}
+
+DeviceDiscovereNativeUI::~DeviceDiscovereNativeUI()
+{
+        if(discoveryUI)
+                delete discoveryUI;
+}
+
+void DeviceDiscovereNativeUI::startDiscovery()
+{
+        discoveryUI = new QBtSingleDeviceSelectorUI();
+        connect(discoveryUI, SIGNAL(discoveryCompleted (const QBtDevice &)),
+                        this, SLOT(discoveryCompletedHandle(const QBtDevice &)));
+        discoveryUI->show();
+}
+
+void DeviceDiscovereNativeUI::discoveryCompletedHandle(const QBtDevice &selectedDevice)
+{
+        ui.console->setText("Selected device: " + selectedDevice.getName());
+}
+----
+DeviceDiscovereNativeUI.pro
+
+----
+TEMPLATE = app
+TARGET = DeviceDiscovereNativeUI
+
+QT        += core \
+    gui
+
+HEADERS   += DeviceDiscovereNativeUI.h
+SOURCES   += DeviceDiscovereNativeUI_reg.rss \
+    main.cpp \
+    DeviceDiscovereNativeUI.cpp
+FORMS     += DeviceDiscovereNativeUI.ui
+RESOURCES +=
+
+symbian{
+        TARGET.UID3 = 0xE9935288
+       INCLUDEPATH += /epoc32/include/QBluetooth
+       LIBS += -lQBluetooth
+
+       customrules.pkg_prerules  = \
+        ";QBluetooth" \
+        "@\"$(EPOCROOT)Epoc32/InstallToDevice/QBluetooth_selfsigned.sisx\",(0xA003328D)"\
+        " "
+
+        DEPLOYMENT += customrules
+}
+----
+
+----------------------------------------------------------------------------
+Author:     user1
+Created:    03/18/11 19:39:56
+
+----------------------------------------------------------------------------
+
+Thank you Sir, this will really help me!
+
+----------------------------------------------------------------------------
+Author:     user1
+Created:    03/18/11 20:26:32
+
+----------------------------------------------------------------------------
+
+Sir! I have followed this guide but still, as I said in another post, the usage of QBtSingleDeviceSelectorUI causes the '''Unable to execute the file for security reasons'''. I donno what went wrong, but I have followed all the procedures as you said.
+
+But I have installed the QuteMessenger in my mobile and that works fine and discovers the devices, but I haven't seen any QBtSingleDeviceSelectorUI classes used. I think it is the problem alone with FP1 binaries. May be I could request a ticket if the error is definitely not on my side.
+
+Sir, I still request any other way to retrieve the device list in Qt like the one used in QuteMessenger. Thanks for all the quick efforts you have taken for me.
+
+----------------------------------------------------------------------------
+Author:     user1
+Created:    03/18/11 20:28:50
+
+----------------------------------------------------------------------------
+
+
+CPP File:
+----
+
+
+BtDeviceSelectorUi::BtDeviceSelectorUi(QWidget *parent) : QDialog(parent)
+{
+    btSelectionLayout = new QGridLayout;
+    selectDevice = new  QPushButton("Start Discovery");
+    deviceName = new QLabel("");
+    btSelectionLayout->addWidget(selectDevice);
+    btSelectionLayout->addWidget(deviceName);
+    setLayout(btSelectionLayout);
+    QObject::connect(selectDevice,SIGNAL(clicked()),this,SLOT(startDiscovery()));
+}
+
+BtDeviceSelectorUi::~BtDeviceSelectorUi()
+{
+    delete selectDevice;
+    delete btSelectionLayout;
+    delete discoveryUI;
+    delete deviceName;
+}
+
+void BtDeviceSelectorUi::startDiscovery()
+{
+    discoveryUI = new QBtSingleDeviceSelectorUI();
+    connect(discoveryUI, SIGNAL(discoveryCompleted (const QBtDevice &)),
+                            this, SLOT(discoveryCompletedHandle(const QBtDevice &)));
+            discoveryUI->show();
+
+}
+
+void BtDeviceSelectorUi::discoveryCompletedHandle(const QBtDevice &selectedDevice)
+{
+    this->deviceName->setText(selectedDevice.getName());
+}
+
+----
+Header file implementation:
+----
+class BtDeviceSelectorUi : public QDialog
+{
+    Q_OBJECT
+
+public:
+    BtDeviceSelectorUi(QWidget *parent=0);
+    ~BtDeviceSelectorUi();
+
+public slots:
+    void startDiscovery();
+    void discoveryCompletedHandle(const QBtDevice &selectedDevice);
+
+private:
+    QBtSingleDeviceSelectorUI* discoveryUI;
+    QPushButton *selectDevice;
+    QGridLayout *btSelectionLayout;
+    QLabel *deviceName;
+
+};
+----
+
+----------------------------------------------------------------------------
+Author:     user1
+Created:    03/18/11 21:25:48
+
+----------------------------------------------------------------------------
+
+Sir I have removed some unwanted capabilities and now the project works. The wiki article actually recommended some unwanted capabilities. But am still doing with QBluetooth to get it work.
+
