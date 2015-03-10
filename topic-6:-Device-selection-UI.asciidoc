@@ -1,9 +1,9 @@
-[initial messages not restored]
+_initial messages not restored_
 
 ----------------------------------------------------------------------------
-Author:     ravi4frenz
+Author:     user1
 Created:    03/18/11 03:18:26
-Moderators:
+
 ----------------------------------------------------------------------------
 
 > I've written a Qt wrapper that shows the standard bluetooth selecion UI on Symbian. Where to place it? As the private implementation of the QBtSingleDeviceSelectorUI ?
@@ -14,10 +14,10 @@ Hi Luis, I woul like to have that code, because I need  that option in my app. I
 ----------------------------------------------------------------------------
 Author:     favoritas37
 Created:    03/18/11 11:04:14
-Moderators:
+
 ----------------------------------------------------------------------------
 
-Hello ravi4frenz.
+Hello user1.
 
 QBtSingleDeviceSelectorUI is part of the library so you can find any information needed from the [http://www.csd.uoc.gr/~ftylitak/QBluetooth_repo_doc/class_q_bt_single_device_selector_u_i.html documentation page].
 
@@ -27,7 +27,7 @@ Here follows the code of the project for a quick look:
 
 DeviceDiscovereNativeUI.h
 
-{{{
+----
 
 #ifndef DEVICEDISCOVERENATIVEUI_H
 #define DEVICEDISCOVERENATIVEUI_H
@@ -54,10 +54,10 @@ private:
 };
 
 #endif // DEVICEDISCOVERENATIVEUI_H
-}}}
+----
 DeviceDiscovereNativeUI.cpp
 
-{{{
+----
 
 #include "DeviceDiscovereNativeUI.h"
 
@@ -88,10 +88,10 @@ void DeviceDiscovereNativeUI::discoveryCompletedHandle(const QBtDevice &selected
 {
         ui.console->setText("Selected device: " + selectedDevice.getName());
 }
-}}}
+----
 DeviceDiscovereNativeUI.pro
 
-{{{
+----
 TEMPLATE = app
 TARGET = DeviceDiscovereNativeUI
 
@@ -117,20 +117,20 @@ symbian{
 
         DEPLOYMENT += customrules
 }
-}}}
+----
 
 ----------------------------------------------------------------------------
-Author:     ravi4frenz
+Author:     user1
 Created:    03/18/11 19:39:56
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Thank you Sir, this will really help me!
 
 ----------------------------------------------------------------------------
-Author:     ravi4frenz
+Author:     user1
 Created:    03/18/11 20:26:32
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Sir! I have followed this guide but still, as I said in another post, the usage of QBtSingleDeviceSelectorUI causes the '''Unable to execute the file for security reasons'''. I donno what went wrong, but I have followed all the procedures as you said.
@@ -140,14 +140,14 @@ But I have installed the QuteMessenger in my mobile and that works fine and disc
 Sir, I still request any other way to retrieve the device list in Qt like the one used in QuteMessenger. Thanks for all the quick efforts you have taken for me.
 
 ----------------------------------------------------------------------------
-Author:     ravi4frenz
+Author:     user1
 Created:    03/18/11 20:28:50
-Moderators:
+
 ----------------------------------------------------------------------------
 
 
 CPP File:
-{{{
+----
 
 
 BtDeviceSelectorUi::BtDeviceSelectorUi(QWidget *parent) : QDialog(parent)
@@ -183,9 +183,9 @@ void BtDeviceSelectorUi::discoveryCompletedHandle(const QBtDevice &selectedDevic
     this->deviceName->setText(selectedDevice.getName());
 }
 
-}}}
+----
 Header file implementation:
-{{{
+----
 class BtDeviceSelectorUi : public QDialog
 {
     Q_OBJECT
@@ -205,12 +205,12 @@ private:
     QLabel *deviceName;
 
 };
-}}}
+----
 
 ----------------------------------------------------------------------------
-Author:     ravi4frenz
+Author:     user1
 Created:    03/18/11 21:25:48
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Sir I have removed some unwanted capabilities and now the project works. The wiki article actually recommended some unwanted capabilities. But am still doing with QBluetooth to get it work.
