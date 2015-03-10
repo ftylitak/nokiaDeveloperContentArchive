@@ -1,15 +1,15 @@
-[initial message not found]
+_initial message not found_
 
 ----------------------------------------------------------------------------
-Author:     tms.turs
+Author:     user1
 Created:    12/16/10 12:19:12
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Thanks you! I understand your idea!
-I've using example at here: [http://wiki.forum.nokia.com/index.php/QuteMessenger_-_Bluetooth_Chat] but I can't complier project. Qt creator make too error.
+I've using example at here: http://wiki.forum.nokia.com/index.php/QuteMessenger_-_Bluetooth_Chat but I can't complier project. Qt creator make too error.
 I thinks my project the same this project:
-[http://www.electro-tech-online.com/electronic-projects-design-ideas-reviews/42183-device-control-through-bluetooth-nokia-mobile-phones-full-project.html]
+http://www.electro-tech-online.com/electronic-projects-design-ideas-reviews/42183-device-control-through-bluetooth-nokia-mobile-phones-full-project.html
 and
 
 [http://wiki.forum.nokia.com/index.php/Bluetooth_HID_profile_(client_device)]
@@ -22,7 +22,7 @@ Please help me!
 ----------------------------------------------------------------------------
 Author:     favoritas37
 Created:    12/16/10 13:24:26
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Very nice indeed! Great video :)
@@ -44,9 +44,9 @@ Any option you choose, we will be able to help you if you report any specify pro
 A personal opinion, i use Carbide C++ instead of Qt Creator for such development...but that's as i say personal opinion.
 
 ----------------------------------------------------------------------------
-Author:     tms.turs
+Author:     user1
 Created:    12/16/10 14:04:20
-Moderators:
+
 ----------------------------------------------------------------------------
 
 The first, many thanks to you!
@@ -62,7 +62,7 @@ Please give me advice!
 ----------------------------------------------------------------------------
 Author:     favoritas37
 Created:    12/16/10 14:11:14
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Sorry, i have one question. You say ''"I'll send a character via bluetooth as a short sms". ''
@@ -70,9 +70,9 @@ Sorry, i have one question. You say ''"I'll send a character via bluetooth as a 
 This means you will use the Serial Port out this project? Or you will somehow use the code fron the wiki page that you mentioned earlier?
 
 ----------------------------------------------------------------------------
-Author:     tms.turs
+Author:     user1
 Created:    12/16/10 14:52:27
-Moderators:
+
 ----------------------------------------------------------------------------
 
 Thank for your feed back!
