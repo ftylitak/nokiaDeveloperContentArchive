@@ -1,0 +1,1 @@
+This is an attempt of restoring as many as possible discussions from the already terminated QBluetoothZero's page in Nokia Projects. Some post or topics are missing though the majority of the discussion board has been restored. For privacy and licensing issues all the usernames have been replaced by dummy usernames.
